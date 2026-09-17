@@ -25,6 +25,13 @@ namespace pryPabloGerbaudoSp2
             }
 
         }
+        private void txtNroTicket_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
         private void cmbTipo_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbTipo.Text != "")
@@ -43,15 +50,12 @@ namespace pryPabloGerbaudoSp2
             lstVentas.Items.Add(presentacion);
             txtNroTicket.Clear();
             cmbTipo.SelectedIndex = -1;
+            StreamWriter writer = new StreamWriter("Ventas.txt", true);
+            writer.WriteLine(presentacion);
+            writer.Close();
         }
 
-        private void txtNroTicket_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
+        
     }
 
 }
